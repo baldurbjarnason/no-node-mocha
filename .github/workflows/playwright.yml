@@ -16,7 +16,7 @@ jobs:
       - name: Setup
         run: tasks/setup
       - name: Install CI dependencies
-        run: tasks/ci
+        run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
