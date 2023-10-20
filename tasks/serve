@@ -81,10 +81,6 @@ function handle(response) {
 	});
 }
 
-/**
- * @param {Request}  req - A request.
- * @returns {Promise<Response>} This is the result
- */
 function supportfiles() {
 	return renderTestHTML();
 }
@@ -101,8 +97,9 @@ async function renderTestHTML() {
 	let importMap;
 	try {
 		const baseURL = new URL(`https://localhost:${port}/vendor/`);
+		const importMapFile = await Deno.readTextFile("vendor/import_map.json")
 		const importMapObject = resolveImportMap(
-			JSON.parse(await Deno.readTextFile("vendor/import_map.json")),
+			JSON.parse(importMapFile),
 			baseURL,
 		);
 		importMap = JSON.stringify(

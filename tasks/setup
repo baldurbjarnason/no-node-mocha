@@ -10,7 +10,7 @@ BGreen='\033[1;32m'
 
 # We pin versions in this house because we don't like moving targets
 DENO_VERSION="v1.36.4"
-DENO_SHA="2c3ba45690cf8ace6f48882317024528bc733f23863f94936ec6018a02bbca4a"
+# DENO_SHA="2c3ba45690cf8ace6f48882317024528bc733f23863f94936ec6018a02bbca4a"
 
 
 echo
@@ -33,13 +33,13 @@ fi
 # The setup script we're currently in doesn't actually support windows except possibly by accident.
 
 case $(uname -sm) in
-"Darwin x86_64") target="x86_64-apple-darwin" ;;
-"Darwin arm64") target="aarch64-apple-darwin" ;;
+"Darwin x86_64") target="x86_64-apple-darwin"  DENO_SHA="fc2ec31eb9d4718165db272af60792e64810c4523511c971a45d48e3d432b1c7";;
+"Darwin arm64") target="aarch64-apple-darwin" DENO_SHA="ff329c4969ba32070b6257e38d1e5ec7e3ad82d9" ;;
 "Linux aarch64")
   echo "Error: Official Deno builds for Linux aarch64 are not available. (see: https://github.com/denoland/deno/issues/1846 )" 1>&2
   exit 1
   ;;
-*) target="x86_64-unknown-linux-gnu" ;;
+*) target="x86_64-unknown-linux-gnu" DENO_SHA="2c3ba45690cf8ace6f48882317024528bc733f23863f94936ec6018a02bbca4a" ;;
 esac
 deno_uri="https://github.com/denoland/deno/releases/download/${DENO_VERSION}/deno-${target}.zip"
 
@@ -50,7 +50,7 @@ echo
 unzip -d ".bin" -o "$EXE.zip"
 echo
 echo "Checking the integrity of the download with sha256sum"
-echo "$DENO_SHA $EXE" | sha256sum --check 
+echo "$DENO_SHA $EXE" | sha256sum --check
 chmod +x "$EXE"
 rm "$EXE.zip"
 

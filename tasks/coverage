@@ -4,5 +4,5 @@ shopt -s extglob
 shopt -s globstar
 
 
-
-npx c8 report
+# You can set the coverage threshold to something lower than --100, but in that case it needs to be set individually for each check. For example: --check-coverage --lines 90 --functions 90 --branches 90 --statements 90
+npx c8 report --100
