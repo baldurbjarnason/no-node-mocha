@@ -1,0 +1,16 @@
+{
+	"name": "raggedy-dev-setup",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "npx playwright test"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "UNLICENSED",
+	"devDependencies": {
+		"@playwright/test": "^1.37.1",
+		"c8": "8.0.1"
+	}
+}

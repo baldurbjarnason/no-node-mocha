@@ -1,0 +1,5 @@
+{
+	"imports": {
+		"npm:hash-wasm": "https://esm.sh/hash-wasm@^4.9"
+	}
+}
