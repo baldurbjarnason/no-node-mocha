@@ -86,6 +86,7 @@ function supportfiles() {
 }
 
 async function renderTestHTML() {
+	// This will load the paths of all of the JS files from tests/
 	const testFiles = Array.from(expandGlobSync("tests/**/*.js")).map((
 		walkEntry,
 	) => walkEntry.path).map((path) => {
@@ -93,22 +94,11 @@ async function renderTestHTML() {
 		return `<script type="module" src="${path}"></script>`;
 	}).join("\n");
 
-	// We should load the vendored import map first.
-	let importMap;
-	try {
-		const baseURL = new URL(`https://localhost:${port}/vendor/`);
-		const importMapFile = await Deno.readTextFile("vendor/import_map.json")
-		const importMapObject = resolveImportMap(
-			JSON.parse(importMapFile),
-			baseURL,
-		);
-		importMap = JSON.stringify(
-			importMapObject,
-		);
-	} catch (_err) {
-		importMap = await Deno.readTextFile("import_map.json");
-	}
+	// This part is important. Having an import map is key for
+	// mocking and managing your dependencies
+	const importMap = await Deno.readTextFile("import_map.json");
 
+	// This is the core HTML template.
 	const body = `<!DOCTYPE html>
 <html lang="en">
   <head>
